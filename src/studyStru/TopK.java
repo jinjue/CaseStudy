@@ -63,9 +63,50 @@ public class TopK {
         return low;
     }
 
+    public static int findKthLargest(int[] nums, int k) {
+        if(k > nums.length || nums.length == 0 )
+            return -1;
+        return arrSort(nums,0,nums.length-1,nums.length-k);
+
+    }
+
+    public static int arrSort(int[] nums,int start,int end,int k){
+        int res = FastSort(nums,start,end,k);
+        if(res == k)
+            return nums[res];
+        int index = 0;
+        if(res > k)
+            index = arrSort(nums,start,res-1,k);
+        else
+            index = arrSort(nums,res+1,end,k);
+
+        return index;
+
+    }
+
+    public static int FastSort(int[] nums,int start,int end,int k){
+        int mark = start;
+        int point = nums[start];
+        int next = start;
+        while(next < end){
+            next ++;
+            if(nums[next] < point){
+                mark = mark+1;
+                int temp = nums[mark];
+                nums[mark] = nums[next];
+                nums[next] = temp;
+
+            }
+
+        }
+        nums[start] = nums[mark];
+        nums[mark] = point;
+        return mark;
+    }
+
     public static void main(String[] args) {
         int[] nums = {3,2,1,5,6,4};
         int k = 3;
-        System.out.println(findTopK(nums,k));
+        System.out.println(findKthLargest(nums,k));
     }
 }

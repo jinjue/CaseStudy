@@ -1,4 +1,4 @@
-package studyStru;
+package studyStru.Tree;
 
 import pojo.TreeNode;
 
@@ -61,6 +61,24 @@ public class MyTreeTraverse {
 
         }
     }
+
+    public static void preOrder(TreeNode root){
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            System.out.println(" "+node);
+            if(node.right != null){
+                stack.push(node.right);
+            }
+            if(node.left != null){
+                stack.push(node.left);
+            }
+        }
+    }
+
     /**
      * 中递归方式实现前序遍历
      * @param root
@@ -85,6 +103,23 @@ public class MyTreeTraverse {
                     stack.push(node.right);
                 }
             }
+        }
+    }
+
+    public static void midTraverse2(TreeNode root){
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || root != null){
+           if (root != null){
+                stack.push(root.left);
+                root = root.left;
+            }
+           else {
+               root = stack.pop();
+               System.out.println(" "+ root.val);
+               root = root.right;
+           }
         }
     }
 
@@ -118,6 +153,26 @@ public class MyTreeTraverse {
 
             }
         }
+    }
+
+    public static void afterOrder(TreeNode root){
+        if (root == null)
+            return;
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> collect = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            collect.push(node);
+            if(node.left != null)
+                stack.push(node.left);
+            if(node.right != null)
+                stack.push(node.right);
+        }
+        while (!collect.isEmpty()){
+            System.out.println(" "+collect.pop().val);
+        }
+
     }
 
     /**

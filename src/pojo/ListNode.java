@@ -13,4 +13,10 @@ public class ListNode {
         head.next = node;
         return head;
     }
+    public ListNode getTail(ListNode head){
+        ListNode node = head;
+        while (node.next != null)
+            node = node.next;
+        return node;
+    }
 }

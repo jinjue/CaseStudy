@@ -1,4 +1,4 @@
-package studyStru;
+package studyStru.Tree;
 
 import pojo.TreeNode;
 
